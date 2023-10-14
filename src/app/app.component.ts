@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'vendease-articles-feed';
+    title = 'vendease-articles-feed';
+
+  constructor() { }
+
+  ngOnInit() {}
 }

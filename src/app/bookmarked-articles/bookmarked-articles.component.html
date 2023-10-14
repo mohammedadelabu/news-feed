@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="headers">
+    <div class="heading">{{title}}</div>
+    <button class="button-77" role="button" (click)="goBack()">View News Feed</button>
+  </div>
+  <!-- <div>
+    <ol>
+      <li *ngFor="let bookmark of bookmarks">
+        {{ bookmark.title }}
+        <button (click)="removeBookmark(bookmark)">Remove Bookmark</button>
+      </li>
+    </ol>
+  </div> -->
+
+
+  <div class="card-grid">
+    <mat-card *ngFor="let bookmark of bookmarks" class="example-card">
+      <mat-card-header>
+        <!-- <mat-card-title class="title">{{bookmark.title | slice:0:40}}...</mat-card-title> -->
+      </mat-card-header>
+      <!-- <img mat-card-image class="image" [src]=bookmark.urlToImage alt=""> -->
+      <mat-card-content>
+        <!-- <p class="description">
+          {{bookmark.title | slice:0:30}} |
+        </p> -->
+        <p class="url">
+          <span class="description">{{bookmark.title | slice:0:15}} | </span><a [href]="bookmark.url" target="_blank">{{ bookmark.url | slice: 0:23 }}...</a>
+        </p>
+      </mat-card-content>
+      <mat-card-actions class="style-button">
+        <button class="button-33" role="button" (click)="removeBookmark(bookmark)">Remove Bookmark</button>
+
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div id="back-to-top" title="Back to Top" (click)="scrollToTop()" *ngIf="showBackToTopButton">↑</div>
+</div>
