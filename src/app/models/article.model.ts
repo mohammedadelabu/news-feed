@@ -1,4 +1,3 @@
-// article.model.ts
 export interface Article {
   title: string;
   description: string;

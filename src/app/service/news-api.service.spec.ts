@@ -20,12 +20,7 @@ describe('NewsApiService', () => {
   });
 
   it('should retrieve articles', () => {
-    // const mockResponse = { /* sample response object */};
     const mockResponse = {
-    //   title: "Toyota Inks Deal to Mass Produce Solid State EV Batteries With 932-Mile Range",
-    // description: "Toyota has struck a deal with fellow Japanese company Idemitsu Kosan to mass produce ultra-high-range EVs with solid-state batteries. It's the first major update on the company's plans to be the first to offer these next-gen batteries. Toyota says the new tec…",
-    // url: "https://biztoc.com/x/7127d9f661894163",
-    // urlToImage: "https://c.biztoc.com/p/7127d9f661894163/og.webp",
     "articles":[
       {
         "source": {

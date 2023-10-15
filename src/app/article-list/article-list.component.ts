@@ -3,6 +3,8 @@ import { NewsApiService } from '../service/news-api.service';
 import { Article } from '../models/article.model';
 import { Router } from '@angular/router';
 import { BookmarkService } from '../service/bookmark.service';
+import { ToastrService } from 'ngx-toastr';
+
 import {
   TITLE,
   BUTTON_TEXT,
@@ -40,7 +42,8 @@ export class ArticleListComponent implements OnInit {
   constructor(
     private newsApiService: NewsApiService,
     private bookmarkService: BookmarkService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -53,12 +56,12 @@ export class ArticleListComponent implements OnInit {
     this.newsApiService.getArticles().subscribe({
       next: (data: any) => {
         this.articles = data?.articles.slice(0, 24);
-        console.log(data);
-        console.log(this.articles);
+        this.toastr.success('News Articles are being fetched!', 'Please wait...');
 
       },
       error: (error: any) => {
-        console.log(error);
+        console.error(error);
+        this.toastr.error('News Articles are not fetched!', 'Error!');
       },
       complete: () => {
         this.isLoading = false; // Set isLoading to false when the request is completed (regardless of success or failure)
@@ -74,11 +77,15 @@ export class ArticleListComponent implements OnInit {
     if (this.bookmarks.includes(article)) {
       // Article is already bookmarked, update the button text to 'Already bookmarked'
       article.buttonText = ALREADY_BOOKMARKED;
+      this.toastr.success('An article is bookmarked!', 'Success!');
+
     } else {
       // Article is not yet bookmarked, add it to bookmarks and update the button text
       this.bookmarkService.addBookmark(article);
+      this.toastr.success('An article is bookmarked!', 'Success!');
       article.buttonText = ALREADY_BOOKMARKED;
       this.getBookmarks();
+
     }
   }
 

@@ -1,36 +1,3 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-// import { ArticleListComponent } from './article-list.component';
-// import { HttpClientModule } from '@angular/common/http';
-// import { NewsApiService } from '../service/news-api.service';
-// import { BookmarkService } from '../service/bookmark.service';
-// import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-// describe('ArticleListComponent', () => {
-//   let component: ArticleListComponent;
-//   let fixture: ComponentFixture<ArticleListComponent>;
-
-//   TestBed.configureTestingModule({
-//     imports: [HttpClientModule, HttpClientTestingModule],
-//     providers: [NewsApiService, BookmarkService], // Include any other providers your service depends on
-//   });
-
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       declarations: [ ArticleListComponent ]
-//     })
-//     .compileComponents();
-
-//     fixture = TestBed.createComponent(ArticleListComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
-
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
-
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
@@ -40,7 +7,6 @@ import { BookmarkService } from '../service/bookmark.service';
 import { Article } from '../models/article.model';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ArticleListComponent', () => {
   let component: ArticleListComponent;
@@ -59,7 +25,6 @@ describe('ArticleListComponent', () => {
   beforeEach(async () => {
      TestBed.configureTestingModule({
       declarations: [ ArticleListComponent ],
-      // imports: [ RouterTestingModule, HttpClientModule ],
       imports: [ RouterTestingModule,HttpClientModule ],
       providers: [ NewsApiService, BookmarkService ]
     })

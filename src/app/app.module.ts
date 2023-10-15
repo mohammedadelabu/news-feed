@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticleListModule } from './article-list/article-list.module';
 import { BookmarkedArticlesModule } from './bookmarked-articles/bookmarked-articles.module';
 import { MaterialModule } from './material/material.module';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +25,13 @@ import { MaterialModule } from './material/material.module';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      closeButton: true,
+      progressBar: false,
+      enableHtml: true,
+      preventDuplicates: true,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

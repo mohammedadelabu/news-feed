@@ -6,7 +6,6 @@ import { BOOKMARKS } from '../constants/bookmarked';
   providedIn: 'root'
 })
 export class BookmarkService {
-  // private readonly STORAGE_KEY = BOOKMARKS;
   private static readonly STORAGE_KEY = BOOKMARKS;
 
   public getStorageKey(): string {
@@ -16,9 +15,6 @@ export class BookmarkService {
   getBookmarks(): Article[] {
     const bookmarksData = localStorage.getItem(BookmarkService.STORAGE_KEY);
     return bookmarksData ? JSON.parse(bookmarksData) : [];
-
-    // const bookmarksData = localStorage.getItem(this.STORAGE_KEY);
-    // return bookmarksData ? JSON.parse(bookmarksData) : [];
   }
 
   addBookmark(article: Article): void {

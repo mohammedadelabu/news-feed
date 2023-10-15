@@ -19,10 +19,4 @@ export class NewsApiService {
     const url = `${this.apiUrl}//everything?q=tesla&from=2023-09-14&sortBy=publishedAt&apiKey=${this.apiKey}`
     return this.http.get<any>(url);
   }
-
-  // getArticle(): Observable<any> {
-  //   const articlesData = localStorage.getItem(this.STORAGE_KEY);
-  //   return articlesData ? JSON.parse(articlesData) : [];
-  // }
-
 }

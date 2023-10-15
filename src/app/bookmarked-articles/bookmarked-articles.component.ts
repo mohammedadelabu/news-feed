@@ -3,6 +3,7 @@ import { Article } from '../models/article.model';
 import { BookmarkService } from '../service/bookmark.service';
 import { Router } from '@angular/router';
 import { TITLE, ARTICLE_ROUTE } from '../constants/bookmarked';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bookmarked-articles',
@@ -29,7 +30,8 @@ export class BookmarkedArticlesComponent implements OnInit {
 
   constructor(
     private bookmarkService: BookmarkService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -43,6 +45,8 @@ export class BookmarkedArticlesComponent implements OnInit {
   removeBookmark(bookmark: any) {
     this.bookmarkService.removeBookmark(bookmark);
     this.getBookmarks();
+    this.toastr.warning('A bookmarked article is removed!', 'Warning');
+
   }
 
   goBack() {
