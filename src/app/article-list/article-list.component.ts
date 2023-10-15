@@ -1,6 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { NewsApiService } from '../service/news-api.service';
-import { Article } from '../models/article.model';
+import { IArticle } from '../models/article.model';
 import { Router } from '@angular/router';
 import { BookmarkService } from '../service/bookmark.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +11,7 @@ import {
   ALREADY_BOOKMARKED,
   BOOKMARK_ROUTE,
 } from '../constants/articles';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-article-list',
@@ -18,12 +19,13 @@ import {
   styleUrls: ['./article-list.component.scss'],
 })
 export class ArticleListComponent implements OnInit {
-  articles: Article[] = []; // Array to store fetched articles
-  bookmarks: Article[] = []; // Array to store bookmarked articles
+  articles: IArticle[] = []; // Array to store fetched articles
+  bookmarks: IArticle[] = []; // Array to store bookmarked articles
   title = TITLE; // Title for the article list component
   buttonText = BUTTON_TEXT; // Text for the bookmark button
   showBackToTopButton = false; // Flag to control the visibility of the back to top button
   isLoading = false; // Flag to indicate whether articles are being loaded or not
+  getArticleSub!: Subscription; // Subscription to get articles
 
   // Host listener for window scroll event
   @HostListener('window:scroll', [])
@@ -54,7 +56,7 @@ export class ArticleListComponent implements OnInit {
     // Method to fetch articles from the news API
   getArticles() {
     this.isLoading = true; // Set isLoading to true when starting the request
-    this.newsApiService.getArticles().subscribe({
+    this.getArticleSub = this.newsApiService.getArticles().subscribe({
       next: (data: any) => {
         this.articles = data?.articles.slice(0, 24); // Store fetched articles in the array
         this.toastr.success('News Articles are being fetched!', 'Please wait...'); // Display success message using Toastr
@@ -93,5 +95,10 @@ export class ArticleListComponent implements OnInit {
     // Method to navigate to the bookmark page
   viewBookmarks() {
     this.router.navigate([BOOKMARK_ROUTE]);
+  }
+
+  ngOnDestroy() {
+    // Unsubscribe from the get articles subscription when the component is destroyed
+    this.getArticleSub?.unsubscribe();
   }
 }

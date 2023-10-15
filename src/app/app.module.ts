@@ -26,7 +26,7 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     MaterialModule,
     ToastrModule.forRoot({
-      timeOut: 5000,
+      timeOut: 3000,
       closeButton: true,
       progressBar: false,
       enableHtml: true,

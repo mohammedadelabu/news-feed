@@ -57,7 +57,7 @@ describe('NewsApiService', () => {
       expect(response).toEqual(mockResponse);
     });
 
-    const url = `${environment.API_URL}//everything?q=tesla&from=2023-09-14&sortBy=publishedAt&apiKey=${environment.MY_API_KEY}`;
+    const url = `${environment.API_URL}//top-headlines?country=us&category=business&apiKey=${environment.MY_API_KEY}`;
     const req = httpMock.expectOne(url);
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);

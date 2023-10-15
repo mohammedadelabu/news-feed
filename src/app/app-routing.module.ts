@@ -6,7 +6,8 @@ import { BookmarkedArticlesComponent } from './bookmarked-articles/bookmarked-ar
 const routes: Routes = [
   { path: '', redirectTo: '/articles', pathMatch: 'full' },
   { path: 'articles', component: ArticleListComponent },
-  { path: 'bookmarked', component: BookmarkedArticlesComponent }
+  { path: 'bookmarked', component: BookmarkedArticlesComponent },
+  { path: '**', redirectTo: '/articles' }
 ];
 
 @NgModule({

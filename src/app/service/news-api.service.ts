@@ -19,7 +19,7 @@ export class NewsApiService {
    */
 
   getArticles(): Observable<any> {
-    const url = `${this.apiUrl}//everything?q=tesla&from=2023-09-14&sortBy=publishedAt&apiKey=${this.apiKey}`
+    const url = `${this.apiUrl}//top-headlines?country=us&category=business&apiKey=${this.apiKey}`
     return this.http.get<any>(url); // Send a GET request to the specified URL and return the Observable
   }
 }

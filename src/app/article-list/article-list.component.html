@@ -11,26 +11,28 @@
   </div>
 
   <div class="card-grid">
-    <mat-card *ngFor="let article of articles" class="example-card">
-      <mat-card-header>
-        <mat-card-title class="title">{{article.title | slice:0:65}}...</mat-card-title>
-      </mat-card-header>
-      <img mat-card-image class="image" [src]=article.urlToImage alt="">
-      <mat-card-content>
-        <p class="description">
-          {{article.description | slice:0:105}}...
+    <ng-container *ngFor="let article of articles">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title class="title">{{article.title | slice:0:65}}...</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image class="image" [src]="article.urlToImage" [alt]="article.title | slice:0:40">
+        <mat-card-content>
+          <p class="description">
+            {{article.description | slice:0:105}}...
 
-        </p>
-        <p class="url">
-          <span class="visit">Visit </span> <a [href]="article.url" target="_blank">{{ article.url | slice: 0:28 }}...</a> <span class="visit"> for more</span>
-        </p>
-      </mat-card-content>
-      <mat-card-actions class="style-button">
-        <button class="button-33" role="button" (click)="bookmarkArticle(article)">
-          {{ article.buttonText || 'Add To Bookmark' }}
-        </button>
-      </mat-card-actions>
-    </mat-card>
+          </p>
+          <p class="url">
+            <span class="visit">Visit </span> <a [href]="article.url" target="_blank">{{ article.url | slice: 0:28 }}...</a> <span class="visit"> for more</span>
+          </p>
+        </mat-card-content>
+        <mat-card-actions class="style-button">
+          <button class="button-33" role="button" (click)="bookmarkArticle(article)" style="position: absolute; bottom: 2px; margin-bottom: 10px;">
+            {{ article.buttonText || 'Add To Bookmark' }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
   </div>
   <div id="back-to-top" title="Back to Top" (click)="scrollToTop()" *ngIf="showBackToTopButton">↑</div>
 </div>

@@ -4,16 +4,17 @@ import { of } from 'rxjs';
 import { ArticleListComponent } from './article-list.component';
 import { NewsApiService } from '../service/news-api.service';
 import { BookmarkService } from '../service/bookmark.service';
-import { Article } from '../models/article.model';
+import { IArticle } from '../models/article.model';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+
 
 describe('ArticleListComponent', () => {
   let component: ArticleListComponent;
   let fixture: ComponentFixture<ArticleListComponent>;
   let newsApiService: NewsApiService;
   let bookmarkService: BookmarkService;
-  const mockArticles: Article[] = [
+  const mockArticles: IArticle[] = [
     {
       title: "Top 10 Kitchen Appliances To Perk Up & Improve Your Cooking Process",
       description: "Top 10 Kitchen Appliances To Perk Up & Improve Your Cooking ProcessIf you’re a passionate lover of cooking, or you’ve recently kickstarted your cooking journey, and want to accelerate it even further then you’ve reached the...",
@@ -52,7 +53,7 @@ describe('ArticleListComponent', () => {
   });
 
   it('should bookmark an article and update button text if not already bookmarked', () => {
-    const article: Article = {
+    const article: IArticle = {
       title: "Toyota Inks Deal to Mass Produce Solid State EV Batteries With 932-Mile Range",
       description: "Toyota has struck a deal with fellow Japanese company Idemitsu Kosan...",
       url: "https://biztoc.com/x/7127d9f661894163",
@@ -69,7 +70,7 @@ describe('ArticleListComponent', () => {
   });
 
   it('should update button text to "Already bookmarked" if article is already bookmarked', () => {
-    const article: Article = {
+    const article: IArticle = {
       title: "Toyota Inks Deal to Mass Produce Solid State EV Batteries With 932-Mile Range",
       description: "Toyota has struck a deal with fellow Japanese company Idemitsu Kosan...",
       url: "https://biztoc.com/x/7127d9f661894163",

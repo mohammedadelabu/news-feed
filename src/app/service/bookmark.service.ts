@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Article } from '../models/article.model';
+import { IArticle } from '../models/article.model';
 import { BOOKMARKS } from '../constants/bookmarked';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BookmarkService {
+
+  constructor(
+    private storageService: StorageService
+  ) {}
   private static readonly STORAGE_KEY = BOOKMARKS;
 
   // Returns the storage key used for bookmarks
@@ -14,33 +19,33 @@ export class BookmarkService {
   }
 
   // Retrieves the list of bookmarks from localStorage
-  getBookmarks(): Article[] {
-    const bookmarksData = localStorage.getItem(BookmarkService.STORAGE_KEY);
+  getBookmarks(): IArticle[] {
+    const bookmarksData = this.storageService.getItem(BookmarkService.STORAGE_KEY);
     return bookmarksData ? JSON.parse(bookmarksData) : [];
   }
 
   // Adds a bookmark to the list and updates localStorage
-  addBookmark(article: Article): void {
+  addBookmark(article: IArticle): void {
     const bookmarks = this.getBookmarks();
     bookmarks.push(article);
-    localStorage.setItem(
+    this.storageService.setItem(
       BookmarkService.STORAGE_KEY,
       JSON.stringify(bookmarks)
     );
   }
 
   // Removes a bookmark from the list and updates localStorage
-  removeBookmark(bookmark: Article): void {
+  removeBookmark(bookmark: IArticle): void {
     let bookmarks = this.getBookmarks();
     bookmarks = bookmarks.filter((b) => b.title !== bookmark.title);
-    localStorage.setItem(
+    this.storageService.setItem(
       BookmarkService.STORAGE_KEY,
       JSON.stringify(bookmarks)
     );
   }
 
   // Checks if an article is bookmarked
-  isBookmarked(article: Article): boolean {
+  isBookmarked(article: IArticle): boolean {
     const bookmarks = this.getBookmarks();
     return bookmarks.some((b) => b.title === article.title);
   }

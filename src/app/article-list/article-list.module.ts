@@ -14,7 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     MaterialModule,
     ToastrModule.forRoot({
-      timeOut: 5000,
+      timeOut: 3000,
       closeButton: true,
       progressBar: false,
       enableHtml: true,
