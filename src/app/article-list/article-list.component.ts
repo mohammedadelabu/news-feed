@@ -18,14 +18,14 @@ import {
   styleUrls: ['./article-list.component.scss'],
 })
 export class ArticleListComponent implements OnInit {
-  articles: Article[] = []; // Newly added array
-  bookmarks: Article[] = []; // Newly added array
-  title = TITLE;
-  buttonText = BUTTON_TEXT;
-  showBackToTopButton = false; // Declare the showBackToTopButton property
-  isLoading = false; // Add the isLoading flag
+  articles: Article[] = []; // Array to store fetched articles
+  bookmarks: Article[] = []; // Array to store bookmarked articles
+  title = TITLE; // Title for the article list component
+  buttonText = BUTTON_TEXT; // Text for the bookmark button
+  showBackToTopButton = false; // Flag to control the visibility of the back to top button
+  isLoading = false; // Flag to indicate whether articles are being loaded or not
 
-  // Add a host listener for window scroll event
+  // Host listener for window scroll event
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
     this.showBackToTopButton =
@@ -34,7 +34,7 @@ export class ArticleListComponent implements OnInit {
         document.body.scrollTop) > 500;
   }
 
-  // Method to scroll back to the top
+  // Method to scroll back to the top of the page
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -47,21 +47,22 @@ export class ArticleListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getArticles();
-    this.getBookmarks();
+    this.getArticles(); // Fetch articles when component initializes
+    this.getBookmarks(); // Get the bookmarked articles when component initializes
   }
 
+    // Method to fetch articles from the news API
   getArticles() {
     this.isLoading = true; // Set isLoading to true when starting the request
     this.newsApiService.getArticles().subscribe({
       next: (data: any) => {
-        this.articles = data?.articles.slice(0, 24);
-        this.toastr.success('News Articles are being fetched!', 'Please wait...');
+        this.articles = data?.articles.slice(0, 24); // Store fetched articles in the array
+        this.toastr.success('News Articles are being fetched!', 'Please wait...'); // Display success message using Toastr
 
       },
       error: (error: any) => {
         console.error(error);
-        this.toastr.error('News Articles are not fetched!', 'Error!');
+        this.toastr.error('News Articles are not fetched!', 'Error!'); // Display error message using Toastr
       },
       complete: () => {
         this.isLoading = false; // Set isLoading to false when the request is completed (regardless of success or failure)
@@ -69,26 +70,27 @@ export class ArticleListComponent implements OnInit {
     });
   }
 
+    // Method to get the bookmarked articles from the bookmark service
   getBookmarks() {
     this.bookmarks = this.bookmarkService.getBookmarks();
   }
 
+    // Method to bookmark an article
   bookmarkArticle(article: any) {
     if (this.bookmarks.includes(article)) {
       // Article is already bookmarked, update the button text to 'Already bookmarked'
       article.buttonText = ALREADY_BOOKMARKED;
-      this.toastr.success('An article is bookmarked!', 'Success!');
-
+      this.toastr.success('An article is bookmarked!', 'Success!'); // Display success message using Toastr
     } else {
       // Article is not yet bookmarked, add it to bookmarks and update the button text
       this.bookmarkService.addBookmark(article);
       this.toastr.success('An article is bookmarked!', 'Success!');
       article.buttonText = ALREADY_BOOKMARKED;
-      this.getBookmarks();
-
+      this.getBookmarks(); // Refresh the list of bookmarked articles
     }
   }
 
+    // Method to navigate to the bookmark page
   viewBookmarks() {
     this.router.navigate([BOOKMARK_ROUTE]);
   }
