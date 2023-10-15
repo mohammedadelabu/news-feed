@@ -53,6 +53,9 @@ export class ArticleListComponent implements OnInit {
     this.newsApiService.getArticles().subscribe({
       next: (data: any) => {
         this.articles = data?.articles.slice(0, 24);
+        console.log(data);
+        console.log(this.articles);
+
       },
       error: (error: any) => {
         console.log(error);

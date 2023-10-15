@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticleListModule } from './article-list/article-list.module';
 import { BookmarkedArticlesModule } from './bookmarked-articles/bookmarked-articles.module';
-
+import { MaterialModule } from './material/material.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +21,8 @@ import { BookmarkedArticlesModule } from './bookmarked-articles/bookmarked-artic
     ArticleListModule,
     BookmarkedArticlesModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
